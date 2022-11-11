@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="SEF" basedir="." default="build">
+	<property name="test.dir" value="test"/>
+	<property name="testbuild.dir" value="testbuild"/>
+	<property name="build.dir" value="bin"/>
+	
+	<property name="base" value=""/>
+
+	<path id="master-classpath">
+        <fileset dir="lib">
+            <include name="*.jar"/>
+        </fileset>
+        <pathelement path="${build.dir}"/>
+    	<pathelement path="${testbuild.dir}"/>
+    </path>
+
+	<target name="build">
+		<mkdir dir="${testbuild.dir}"/>
+		<javac destdir="${testbuild.dir}" source="1.5" target="1.5" debug="true" 
+			deprecation="false" optimize="false" failonerror="true" srcdir="${test.dir}">
+            <classpath refid="master-classpath"/>
+        </javac>
+	</target>
+	
+	<target name="buildjar" depends="build" description="build the application as a jar file">
+		<jar destfile="lib./SEF_Test.jar" basedir="${testbuild.dir}">
+		</jar>
+	</target>
+	
+</project>
